@@ -14,7 +14,8 @@ export function loadingApiCall (bool) {
 
 export function postSentence(sentence) {
     return (dispatch) => {
-        
+        console.log(sentence)
+        dispatch(loadingApiCall(true))
         fetch(API_ROOT + 'api/Reverse', {
             method: 'POST',
             headers: {
@@ -23,18 +24,23 @@ export function postSentence(sentence) {
             body: JSON.stringify({
                 text: sentence.text
             })
-        }).then(response => {
-            if (response.status === 200) {
-                console.log('error in call')
-                response.json().then(sentence => {
-                    dispatch(addSentence(sentence))
-                })
-            }
-            else{
-                //errorhandling
-                console.log("error!")
-            }})
-        dispatch(loadingApiCall(true))
+        })
+        .then(response => response.json())
+        .then(sentence => dispatch(addSentence(sentence)))
+        .catch(ex => {console.log(ex)})
+        // .then(response => {
+        //     if (response.status === 200) {
+        //         response.json().then(sentence => {
+        //             dispatch(addSentence(sentence))
+        //         })
+        //     }
+        //     else{
+        //         //errorhandling
+        //         console.log("error!")
+        //     }}).catch(error => {
+        //         console.log(error)
+        //     })
+        
     }
 }
 
