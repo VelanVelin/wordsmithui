@@ -11,7 +11,21 @@ export function loadingApiCall (bool) {
         isLoading: bool
     };
 }
-
+export function getSentence (responseId){
+    return (dispatch) => {
+        console.log(responseId)
+        dispatch(loadingApiCall(true))
+        fetch(API_ROOT + 'api/Reverse/' + responseId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(response => dispatch(addSentence(response)))
+        .catch(ex => {console.log(ex)})
+    }
+}
 export function postSentence(sentence) {
     return (dispatch) => {
         console.log(sentence)
@@ -25,22 +39,9 @@ export function postSentence(sentence) {
                 text: sentence.text
             })
         })
-        .then(response => response.json())
-        .then(sentence => dispatch(addSentence(sentence)))
+        .then(responseId => responseId.json())
+        .then(responseId => dispatch(getSentence(responseId)))
         .catch(ex => {console.log(ex)})
-        // .then(response => {
-        //     if (response.status === 200) {
-        //         response.json().then(sentence => {
-        //             dispatch(addSentence(sentence))
-        //         })
-        //     }
-        //     else{
-        //         //errorhandling
-        //         console.log("error!")
-        //     }}).catch(error => {
-        //         console.log(error)
-        //     })
-        
     }
 }
 

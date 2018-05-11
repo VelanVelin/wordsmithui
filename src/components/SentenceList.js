@@ -12,7 +12,10 @@ import {
 } from 'material-ui/Table';
 
 const mapStateToProps = state => {
-  return { sentences: state.sentences };
+  return { 
+    sentences: state.sentences,
+    apiCallLoading: state.apiCallLoading 
+  };
 };
 
 const SentenceList = ({ sentences }) => (

@@ -1,14 +1,14 @@
 
 import React, { Component } from 'react';
-// import { connect } from 'react-redux'
 
 class About extends Component{
     render() {
         return (
-            <div className="AboutContainer">
-                <h2>About Word Smith App</h2>
-                <div className="AboutMainSection">
-                    <div className="AboutText">
+            <div className="AboutContainer container">
+                
+                <div className="row">
+                    <div className="col-md-4 col-md-offset-2">
+                        <h2>About Word Smith App</h2>
                         <p>
                             This little app consits of one web api and one frontend. 
                         </p>
@@ -22,15 +22,26 @@ class About extends Component{
                             The serverside solution implements a very simple CQRS pattern. 
                         </p>
                     </div>
-                    <div>
+                    <div className="col-md-4">
                         {/* logos! */}
-                        fixa get//fetch
+                        <h2>Technology used</h2>
+                        <div className="row col-md-offset-1" >
+                            <img src={require('../logos/logo.svg')} alt="React" height="90px" display="block" />
+                        
+                            <img src={require('../logos/redux.png')} alt="Redux" height="70px" />
+                        </div>
+                        <div className="row">
+                            <img src={require('../logos/core.PNG')} alt=".NET Core" height="100px"/>
+                            <img src={require('../logos/efcore.png')} alt="EF Core" height="100px"  />
+                        </div>
+                        
+                        {/* fixa get//fetch
                         fixa så man kan editera en vald från listan
                         fixa egna post och read entiter
-                        loggning i backend
+                        loggning i backend hmm
                         frontendtest --> action
                         loading
-                        git
+                        git */}
                         
                     </div>
                 </div>
