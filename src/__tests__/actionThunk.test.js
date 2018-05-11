@@ -22,7 +22,9 @@ describe('async actions', () => {
 
         const expectedActions = [
             { type: 'LOADING_API_CALL', isLoading: true },
+            { type: 'LOADING_API_CALL', isLoading: false },
             { type: 'LOADING_API_CALL', isLoading: true },
+            { type: 'LOADING_API_CALL', isLoading: false },
             { type: 'ADD_SENTENCE', payload: mockResult}
         ]
         
@@ -31,9 +33,9 @@ describe('async actions', () => {
         // store.dispatch(getSentence(1))
     return store.dispatch(postSentence({text: 'The red fox crosses the ice, intent on none of my business.'})).then((response) => {
         console.log(response)
-        //fill expected result from response
-        expectedActions[2].payload.id = response.payload.id
-        expectedActions[2].payload.sessionId = response.payload.sessionId
+        //fill generated ids from response
+        expectedActions[4].payload.id = response.payload.id
+        expectedActions[4].payload.sessionId = response.payload.sessionId
       expect(store.getActions()).toEqual(expectedActions)
 
     })

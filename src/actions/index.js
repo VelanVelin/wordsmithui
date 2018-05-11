@@ -4,14 +4,13 @@ import fetch from 'isomorphic-fetch'
 export const addSentence = sentence => ({
     type: 'ADD_SENTENCE',
     payload: sentence
-});
+})
 
-export function loadingApiCall (bool) {
-    return {
+export const loadingApiCall = bool => ({
         type: 'LOADING_API_CALL',
         isLoading: bool
-    };
-}
+})
+
 export function getSentence (responseId){
     return (dispatch) => {
         console.log('in getSentence, responseId: ' + responseId)
@@ -24,7 +23,9 @@ export function getSentence (responseId){
         })
         .then(response => response.json())
         .then(response => dispatch(addSentence(response)))
+        .then(dispatch(loadingApiCall(false)))
         .catch(ex => {
+            dispatch(loadingApiCall(false))
             console.log('getSentence failed with ex:')
             console.log(ex)
         })
@@ -45,7 +46,9 @@ export function postSentence(sentence) {
         })
         .then(responseId => responseId.json())
         .then(responseId => dispatch(getSentence(responseId)))
+        .then(dispatch(loadingApiCall(false)))
         .catch(ex => {
+            dispatch(loadingApiCall(false))
             console.log('postSentence failed with ex:')
             console.log(ex)
         })
