@@ -34,15 +34,6 @@ class About extends Component{
                             <img src={require('../logos/core.PNG')} alt=".NET Core" height="100px"/>
                             <img src={require('../logos/efcore.png')} alt="EF Core" height="100px"  />
                         </div>
-                        
-                        {/* fixa get//fetch
-                        fixa så man kan editera en vald från listan
-                        fixa egna post och read entiter
-                        loggning i backend hmm
-                        frontendtest --> action
-                        loading
-                        git */}
-                        
                     </div>
                 </div>
             </div>
