@@ -1,5 +1,5 @@
 import {API_ROOT} from '../consts'
-
+import 'isomorphic-fetch'
 export const addSentence = sentence => ({
     type: 'ADD_SENTENCE',
     payload: sentence
@@ -13,7 +13,7 @@ export function loadingApiCall (bool) {
 }
 export function getSentence (responseId){
     return (dispatch) => {
-        console.log(responseId)
+        console.log('in getSentence, responseId: ' + responseId)
         dispatch(loadingApiCall(true))
         fetch(API_ROOT + 'api/Reverse/' + responseId, {
             method: 'GET',
@@ -23,12 +23,15 @@ export function getSentence (responseId){
         })
         .then(response => response.json())
         .then(response => dispatch(addSentence(response)))
-        .catch(ex => {console.log(ex)})
+        .catch(ex => {
+            console.log('getSentence failed with ex:')
+            console.log(ex)
+        })
     }
 }
 export function postSentence(sentence) {
     return (dispatch) => {
-        console.log(sentence)
+        console.log('in postSentence, sentence:' + sentence)
         dispatch(loadingApiCall(true))
         fetch(API_ROOT + 'api/Reverse', {
             method: 'POST',
@@ -41,7 +44,10 @@ export function postSentence(sentence) {
         })
         .then(responseId => responseId.json())
         .then(responseId => dispatch(getSentence(responseId)))
-        .catch(ex => {console.log(ex)})
+        .catch(ex => {
+            console.log('postSentence failed with ex:')
+            console.log(ex)
+        })
     }
 }
 
