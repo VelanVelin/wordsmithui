@@ -51,7 +51,7 @@ class AddSentence extends Component {
                 value= {text}
                 />
             </div>
-            <RaisedButton type="submit" label="REVERSE" />
+            <RaisedButton type="submit" label="REVERSE" disabled={this.state.text === ""} />
         </form>
         );
     }
